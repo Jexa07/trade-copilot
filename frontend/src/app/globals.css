@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f5f0;
+  --surface: #ffffff;
+  --surface-2: #f0ede6;
+  --foreground: #11100d; /* Darker, richer ink black for striking contrast */
+  --foreground-muted: #4e4a43; /* Richer espresso-tinted dark gray for sub-headings */
+  --foreground-subtle: #807b73; /* Clearer secondary labels */
+  --border: #dfd9ce;
+  --border-strong: #c4bcae;
+
+  --primary: #8c6f4a;
+  --primary-hover: #735939;
+  --primary-light: #f5ede1;
+  --primary-glow: rgba(140, 111, 74, 0.12);
+
+  --success: #205c3c; /* Stronger, punchier green for contrast */
+  --success-bg: #eff6f2;
+  --success-border: #aedcc3;
+  --success-text: #143e27;
+
+  --danger: #9a2b1d; /* Deeper terracotta red for superb legibility */
+  --danger-bg: #fdf2f0;
+  --danger-border: #f1b3ab;
+  --danger-text: #6b140a;
+
+  --neutral: #786851;
+  --neutral-bg: #f5f2eb;
+  --neutral-border: #d5ccba;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-serif: var(--font-lora), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Custom Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface-2);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* ─── Designer Grid Background ─── */
+.designer-grid {
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: -1px -1px;
+  opacity: 0.4;
+}
+
+/* ─── Panels & Cards ─── */
+.editorial-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 4px rgba(17, 16, 13, 0.04), 0 4px 16px rgba(17, 16, 13, 0.04);
+}
+
+.editorial-sidebar {
+  background: var(--surface-2);
+  border-right: 1px solid var(--border);
+}
+
+.editorial-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(17, 16, 13, 0.05);
+  transition: all 0.2s ease;
+}
+
+.editorial-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: 0 4px 20px rgba(17, 16, 13, 0.08);
+  transform: translateY(-1px);
+}
+
+/* ─── Typography ─── */
+.serif-heading {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--foreground) 30%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-success {
+  background: linear-gradient(135deg, #1a4731 0%, var(--success) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-danger {
+  background: linear-gradient(135deg, #6b1f14 0%, var(--danger) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Buttons ─── */
+.btn-primary {
+  background: var(--primary);
+  color: #ffffff;
+  border: 1px solid var(--primary);
+  transition: all 0.2s ease;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+  box-shadow: 0 4px 16px rgba(140, 111, 74, 0.25);
+  transform: translateY(-1px);
+}
+
+/* ─── Input ─── */
+.editorial-input {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  transition: all 0.2s ease;
+}
+
+.editorial-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(140, 111, 74, 0.1);
+  outline: none;
+}
+
+.editorial-input::placeholder {
+  color: var(--foreground-subtle);
+}
+
+/* ─── Divider ─── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+/* ─── Badge / Label Utilities ─── */
+.badge-success {
+  background: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid var(--success-border);
+}
+
+.badge-danger {
+  background: var(--danger-bg);
+  color: var(--danger-text);
+  border: 1px solid var(--danger-border);
+}
+
+.badge-neutral {
+  background: var(--neutral-bg);
+  color: var(--neutral);
+  border: 1px solid var(--neutral-border);
+}
+
+/* ─── Sentiment accent panels ─── */
+.panel-bullish {
+  background: var(--success-bg);
+  border-left: 3px solid var(--success);
+  border-top: 1px solid var(--success-border);
+  border-right: 1px solid var(--success-border);
+  border-bottom: 1px solid var(--success-border);
+}
+
+.panel-bearish {
+  background: var(--danger-bg);
+  border-left: 3px solid var(--danger);
+  border-top: 1px solid var(--danger-border);
+  border-right: 1px solid var(--danger-border);
+  border-bottom: 1px solid var(--danger-border);
+}
+
+.panel-neutral {
+  background: var(--neutral-bg);
+  border-left: 3px solid var(--neutral);
+  border-top: 1px solid var(--neutral-border);
+  border-right: 1px solid var(--neutral-border);
+  border-bottom: 1px solid var(--neutral-border);
+}
