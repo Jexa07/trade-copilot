@@ -3,6 +3,6 @@ uvicorn
 yfinance
 pandas
 numpy==1.26.4
-ta
+pandas_ta
 python-dotenv
 groq
