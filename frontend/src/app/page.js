@@ -44,7 +44,7 @@ export default function Home() {
     try {
       setLoading(true);
       const response = await axios.get(
-        `http://127.0.0.1:8000/market/${cleanSymbol}`
+        `https://trade-copilot-backend.onrender.com/market/${symbol}`
       );
       setData(response.data);
     } catch (err) {
@@ -97,30 +97,26 @@ export default function Home() {
                       setSymbol(stock);
                       fetchMarketData(stock);
                     }}
-                    className={`w-full text-left p-3.5 rounded-xl border transition-all duration-200 flex items-center justify-between group ${
-                      isActive
+                    className={`w-full text-left p-3.5 rounded-xl border transition-all duration-200 flex items-center justify-between group ${isActive
                         ? "bg-white border-[#8c6f4a] text-[#8c6f4a] shadow-sm font-bold"
                         : "bg-white/40 hover:bg-white/80 border-[#dfd9ce] text-[#4e4a43] hover:text-[#11100d]"
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center gap-3">
-                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${
-                        isActive ? "bg-[#f5ede1] text-[#8c6f4a]" : "bg-[#dfd9ce] text-[#786851] group-hover:bg-[#d5ccba]"
-                      }`}>
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${isActive ? "bg-[#f5ede1] text-[#8c6f4a]" : "bg-[#dfd9ce] text-[#786851] group-hover:bg-[#d5ccba]"
+                        }`}>
                         <span className="text-xs font-extrabold font-sans">{stock.slice(0, 2)}</span>
                       </div>
                       <span className="font-bold text-sm tracking-tight font-sans">{stock}</span>
                     </div>
 
                     <div className="flex items-center gap-1.5">
-                      <span className={`text-[9px] uppercase font-extrabold tracking-wider px-1.5 py-0.5 rounded transition-all ${
-                        isActive ? "bg-[#f5ede1] text-[#8c6f4a]" : "bg-[#dfd9ce] text-[#4e4a43]"
-                      }`}>
+                      <span className={`text-[9px] uppercase font-extrabold tracking-wider px-1.5 py-0.5 rounded transition-all ${isActive ? "bg-[#f5ede1] text-[#8c6f4a]" : "bg-[#dfd9ce] text-[#4e4a43]"
+                        }`}>
                         NSE
                       </span>
-                      <svg className={`w-4 h-4 transition-transform duration-200 ${
-                        isActive ? "text-[#8c6f4a] translate-x-0.5" : "text-[#807b73] group-hover:translate-x-0.5 group-hover:text-[#4e4a43]"
-                      }`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <svg className={`w-4 h-4 transition-transform duration-200 ${isActive ? "text-[#8c6f4a] translate-x-0.5" : "text-[#807b73] group-hover:translate-x-0.5 group-hover:text-[#4e4a43]"
+                        }`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                       </svg>
                     </div>
@@ -227,18 +223,17 @@ export default function Home() {
         {/* Main Dashboard Panel */}
         {!loading && data && (
           <div className="space-y-6 flex-1 flex flex-col">
-            
+
             {/* AI Insights & Trend Row */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              
+
               {/* Left 2 cols: AI Insights */}
-              <div className={`lg:col-span-2 p-6 rounded-2xl border relative overflow-hidden flex flex-col justify-between group ${
-                data.context.trend === "Bullish"
+              <div className={`lg:col-span-2 p-6 rounded-2xl border relative overflow-hidden flex flex-col justify-between group ${data.context.trend === "Bullish"
                   ? "panel-bullish"
                   : data.context.trend === "Bearish"
                     ? "panel-bearish"
                     : "panel-neutral"
-              }`}>
+                }`}>
                 {/* Background Ambient SVG Decoration */}
                 <div className="absolute right-0 bottom-0 opacity-[0.03] text-[#11100d] pointer-events-none select-none translate-x-6 translate-y-6">
                   <svg className="w-64 h-64" fill="currentColor" viewBox="0 0 24 24">
@@ -258,20 +253,18 @@ export default function Home() {
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <span className={`inline-flex items-center px-2.5 py-1 rounded-md text-xs font-extrabold tracking-wider uppercase ${
-                        data.context.trend === "Bullish"
+                      <span className={`inline-flex items-center px-2.5 py-1 rounded-md text-xs font-extrabold tracking-wider uppercase ${data.context.trend === "Bullish"
                           ? "badge-success"
                           : data.context.trend === "Bearish"
                             ? "badge-danger"
                             : "badge-neutral"
-                      }`}>
-                        <span className={`w-1.5 h-1.5 rounded-full mr-1.5 ${
-                          data.context.trend === "Bullish"
+                        }`}>
+                        <span className={`w-1.5 h-1.5 rounded-full mr-1.5 ${data.context.trend === "Bullish"
                             ? "bg-[#205c3c] animate-pulse"
                             : data.context.trend === "Bearish"
                               ? "bg-[#9a2b1d] animate-pulse"
                               : "bg-[#786851] animate-pulse"
-                        }`} />
+                          }`} />
                         {data.context.trend} Sentiment
                       </span>
                     </div>
@@ -286,7 +279,7 @@ export default function Home() {
               {/* Right 1 col: Key metric Highlight */}
               <div className="bg-white border border-[#dfd9ce] p-6 rounded-2xl flex flex-col justify-between relative overflow-hidden group shadow-sm">
                 <div className="absolute right-[-20px] top-[-20px] w-32 h-32 rounded-full bg-[#f5ede1] blur-2xl group-hover:bg-[#eedfcb] transition-all duration-500" />
-                
+
                 <div className="relative z-10">
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-xs font-extrabold text-[#786851] uppercase tracking-widest font-sans">Asset Valuation</span>
@@ -340,31 +333,28 @@ export default function Home() {
 
             {/* Technical Indicators Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              
+
               {/* Card 1: Trend */}
               <div className="bg-white border border-[#dfd9ce] p-5 rounded-2xl flex items-center justify-between shadow-xs hover:shadow-md hover:border-[#c4bcae] transition-all duration-200 group relative overflow-hidden">
-                <div className={`absolute top-[-30px] right-[-30px] w-20 h-20 rounded-full blur-xl opacity-10 ${
-                  data.context.trend === "Bullish" ? "bg-[#205c3c]" : data.context.trend === "Bearish" ? "bg-[#9a2b1d]" : "bg-[#786851]"
-                }`} />
+                <div className={`absolute top-[-30px] right-[-30px] w-20 h-20 rounded-full blur-xl opacity-10 ${data.context.trend === "Bullish" ? "bg-[#205c3c]" : data.context.trend === "Bearish" ? "bg-[#9a2b1d]" : "bg-[#786851]"
+                  }`} />
                 <div className="space-y-1 z-10">
                   <span className="text-[11px] font-extrabold text-[#786851] uppercase tracking-widest font-sans">Trend Sentiment</span>
-                  <p className={`text-2xl font-extrabold tracking-tight font-sans ${
-                    data.context.trend === "Bullish"
+                  <p className={`text-2xl font-extrabold tracking-tight font-sans ${data.context.trend === "Bullish"
                       ? "text-[#205c3c]"
                       : data.context.trend === "Bearish"
                         ? "text-[#9a2b1d]"
                         : "text-[#786851]"
-                  }`}>
+                    }`}>
                     {data.context.trend}
                   </p>
                 </div>
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center border transition-all z-10 ${
-                  data.context.trend === "Bullish"
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center border transition-all z-10 ${data.context.trend === "Bullish"
                     ? "bg-[#eff6f2] border-[#aedcc3] text-[#205c3c]"
                     : data.context.trend === "Bearish"
                       ? "bg-[#fdf2f0] border-[#f1b3ab] text-[#9a2b1d]"
                       : "bg-[#f5f2eb] border-[#d5ccba] text-[#786851]"
-                }`}>
+                  }`}>
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                   </svg>
