@@ -1,16 +1,27 @@
-import pandas_ta as ta
+from ta.trend import MACD
+from ta.momentum import RSIIndicator
 
 
 def calculate_indicators(df):
 
-    df["rsi"] = ta.rsi(df["Close"], length=14)
+    # RSI
 
-    macd = ta.macd(df["Close"])
+    rsi = RSIIndicator(close=df["Close"], window=14)
 
-    df["macd"] = macd["MACD_12_26_9"]
+    df["rsi"] = rsi.rsi()
 
-    df["ema_20"] = ta.ema(df["Close"], length=20)
+    # MACD
 
-    df["ema_50"] = ta.ema(df["Close"], length=50)
+    macd = MACD(close=df["Close"])
+
+    df["macd"] = macd.macd()
+
+    # EMA 20
+
+    df["ema_20"] = df["Close"].ewm(span=20).mean()
+
+    # EMA 50
+
+    df["ema_50"] = df["Close"].ewm(span=50).mean()
 
     return df
